@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
   const toggleMenu = () => setIsOpen(!isOpen)
 
   return (
-    <Box bg="white" boxShadow="0 2px 10px rgba(0,0,0,0.1)" position="sticky" top={0} zIndex={1000}>
+    <Box bg="pink.600" boxShadow="0 2px 10px rgba(0,0,0,0.1)" position="sticky" top={0} zIndex={1000}>
       <Box maxW="7xl" mx="auto" px={4}>
         <Flex align="center" justify="space-between" py={4}>
           {/* Logo */}
@@ -171,63 +171,110 @@ const Navbar: React.FC = () => {
           </HStack>
         </Flex>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Overlay */}
         {isOpen && (
-          <Box pb={4} display={{ md: "none" }}>
-            <VStack spacing={4} align="stretch">
-              {/* Mobile Navigation Links */}
-              <VStack spacing={2} align="stretch">
-                {[
-                  { label: "Home", href: "#home" },
-                  { label: "Cakes", href: "#cakes" },
-                  { label: "Custom Orders", href: "#custom" },
-                  { label: "About", href: "#about" },
-                  { label: "Contact", href: "#contact" },
-                ].map((item, index) => (
-                  <Text
-                    key={index}
-                    as="a"
-                    href={item.href}
-                    p={3}
-                    borderRadius="md"
+          <>
+            {/* Backdrop */}
+            <Box
+              position="fixed"
+              top="0"
+              left="0"
+              w="100vw"
+              h="100vh"
+              bg="blackAlpha.600"
+              zIndex={999}
+              onClick={() => setIsOpen(false)}
+              display={{ md: "none" }}
+            />
+
+            {/* Mobile Menu */}
+            <Box
+              position="absolute"
+              top="100%"
+              left="0"
+              right="0"
+              bg="pink.600"
+              borderRadius="0 0 xl xl"
+              boxShadow="0 10px 30px rgba(0,0,0,0.3)"
+              zIndex={1000}
+              display={{ md: "none" }}
+              p={6}
+              border="2px solid"
+              borderColor="pink.700"
+              borderTop="none"
+            >
+              <VStack spacing={4} align="stretch">
+                {/* Mobile Navigation Links */}
+                <VStack spacing={2} align="stretch">
+                  {[
+                    { label: "Home", href: "#home" },
+                    { label: "Cakes", href: "#cakes" },
+                    { label: "Custom Orders", href: "#custom" },
+                    { label: "About", href: "#about" },
+                    { label: "Contact", href: "#contact" },
+                  ].map((item, index) => (
+                    <Text
+                      key={index}
+                      as="a"
+                      href={item.href}
+                      p={4}
+                      borderRadius="lg"
+                      color="black"
+                      fontWeight="semibold"
+                      cursor="pointer"
+                      fontSize="lg"
+                      _hover={{
+                        bg: "pink.500",
+                        color: "white",
+                        transform: "translateX(8px)",
+                      }}
+                      transition="all 0.2s"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.label}
+                    </Text>
+                  ))}
+                </VStack>
+
+                {/* Mobile Actions */}
+                <VStack spacing={3} pt={4} borderTop="2px solid" borderColor="pink.700">
+                  <HStack spacing={3} w="full">
+                    <Button
+                      bg="gray.100"
+                      color="black"
+                      flex={1}
+                      _hover={{ bg: "black", color: "white" }}
+                      borderRadius="lg"
+                    >
+                      🔍 Search
+                    </Button>
+                    <Button
+                      bg="gray.100"
+                      color="black"
+                      flex={1}
+                      _hover={{ bg: "black", color: "white" }}
+                      borderRadius="lg"
+                    >
+                      ❤️ Wishlist
+                    </Button>
+                  </HStack>
+
+                  <Button
+                    variant="outline"
+                    borderColor="black"
                     color="black"
-                    fontWeight="semibold"
-                    cursor="pointer"
-                    _hover={{
-                      bg: "pink.50",
-                      color: "pink.600",
-                    }}
-                    onClick={() => setIsOpen(false)}
+                    w="full"
+                    borderRadius="lg"
+                    py={6}
+                    fontSize="lg"
+                    _hover={{ bg: "black", color: "white" }}
                   >
-                    {item.label}
-                  </Text>
-                ))}
-              </VStack>
-
-              {/* Mobile Actions */}
-              <VStack spacing={3} pt={4} borderTop="1px solid" borderColor="gray.200">
-                <HStack spacing={3} w="full">
-                  <Button bg="gray.100" color="black" flex={1} _hover={{ bg: "black", color: "white" }}>
-                    🔍 Search
+                    👤 Login / Sign Up
                   </Button>
-                  <Button bg="gray.100" color="black" flex={1} _hover={{ bg: "black", color: "white" }}>
-                    ❤️ Wishlist
-                  </Button>
-                </HStack>
-
-                <Button
-                  variant="outline"
-                  borderColor="black"
-                  color="black"
-                  w="full"
-                  borderRadius="full"
-                  _hover={{ bg: "black", color: "white" }}
-                >
-                  👤 Login / Sign Up
-                </Button>
+                </VStack>
               </VStack>
-            </VStack>
-          </Box>
+            </Box>
+          </>
         )}
       </Box>
     </Box>
