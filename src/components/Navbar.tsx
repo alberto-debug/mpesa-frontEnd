@@ -5,6 +5,28 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { Box, Flex, HStack, VStack, Text, Button, Badge } from "@chakra-ui/react"
 
+// Add this style tag for animations
+const styles = `
+  @keyframes ripple {
+    to {
+      width: 45px;
+      height: 45px;
+      opacity: 0;
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.7;
+    }
+  }
+`
+
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [cartCount] = useState(3)
@@ -19,6 +41,14 @@ const Navbar: React.FC = () => {
 
     window.addEventListener("keydown", handleEscape)
     return () => window.removeEventListener("keydown", handleEscape)
+  }, [])
+
+  // Add this useEffect to inject styles
+  useEffect(() => {
+    const styleSheet = document.createElement("style")
+    styleSheet.innerText = styles
+    document.head.appendChild(styleSheet)
+    return () => document.head.removeChild(styleSheet)
   }, [])
 
   return (
@@ -124,7 +154,9 @@ const Navbar: React.FC = () => {
               size="sm"
               borderRadius="full"
               position="relative"
-              _hover={{ bg: "gray.800" }}
+              _hover={{ bg: "gray.800", transform: "scale(1.05)" }}
+              transition="all 0.2s"
+              boxShadow="0 4px 12px rgba(0,0,0,0.3)"
             >
               🛒
               {cartCount > 0 && (
@@ -141,22 +173,113 @@ const Navbar: React.FC = () => {
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
+                  boxShadow="0 2px 8px rgba(0,0,0,0.2)"
                 >
                   {cartCount}
                 </Badge>
               )}
             </Button>
 
-            <Button
-              bg="gray.100"
-              color="black"
-              size="sm"
-              onClick={toggleMenu}
-              _hover={{ bg: "gray.200" }}
-              zIndex={1200}
-            >
-              {isOpen ? "✕" : "☰"}
-            </Button>
+            {/* Modern Hamburger Button */}
+            <Box position="relative">
+              <Button
+                onClick={toggleMenu}
+                bg="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+                color="white"
+                w="36px"
+                h="36px"
+                size="sm"
+                borderRadius="xl"
+                p={0}
+                _hover={{
+                  transform: "scale(1.05) rotate(5deg)",
+                  boxShadow: "0 8px 25px rgba(102, 126, 234, 0.4)",
+                }}
+                _active={{
+                  transform: "scale(0.95)",
+                }}
+                transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+                boxShadow="0 4px 15px rgba(102, 126, 234, 0.3)"
+                border="2px solid"
+                borderColor="whiteAlpha.300"
+                zIndex={1200}
+                position="relative"
+                overflow="hidden"
+              >
+                {/* Animated Background Gradient */}
+                <Box
+                  position="absolute"
+                  top="0"
+                  left="0"
+                  w="100%"
+                  h="100%"
+                  bg="linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%)"
+                  opacity={isOpen ? 0 : 1}
+                  transition="opacity 0.3s"
+                />
+
+                {/* Custom Hamburger Lines */}
+                <VStack spacing="3px" position="relative" zIndex={1}>
+                  <Box
+                    w="14px"
+                    h="1.5px"
+                    bg="white"
+                    borderRadius="full"
+                    transform={isOpen ? "rotate(45deg) translateY(4.5px)" : "rotate(0)"}
+                    transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+                    boxShadow="0 1px 3px rgba(0,0,0,0.3)"
+                  />
+                  <Box
+                    w="14px"
+                    h="1.5px"
+                    bg="white"
+                    borderRadius="full"
+                    opacity={isOpen ? 0 : 1}
+                    transform={isOpen ? "scale(0)" : "scale(1)"}
+                    transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+                    boxShadow="0 1px 3px rgba(0,0,0,0.3)"
+                  />
+                  <Box
+                    w="14px"
+                    h="1.5px"
+                    bg="white"
+                    borderRadius="full"
+                    transform={isOpen ? "rotate(-45deg) translateY(-4.5px)" : "rotate(0)"}
+                    transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+                    boxShadow="0 1px 3px rgba(0,0,0,0.3)"
+                  />
+                </VStack>
+
+                {/* Ripple Effect */}
+                <Box
+                  position="absolute"
+                  top="50%"
+                  left="50%"
+                  w="0"
+                  h="0"
+                  bg="whiteAlpha.300"
+                  borderRadius="full"
+                  transform="translate(-50%, -50%)"
+                  animation={isOpen ? "ripple 0.6s ease-out" : "none"}
+                />
+              </Button>
+
+              {/* Floating Indicator */}
+              {isOpen && (
+                <Box
+                  position="absolute"
+                  top="-1px"
+                  right="-1px"
+                  w="8px"
+                  h="8px"
+                  bg="green.400"
+                  borderRadius="full"
+                  border="2px solid white"
+                  boxShadow="0 2px 8px rgba(0,0,0,0.2)"
+                  animation="pulse 2s infinite"
+                />
+              )}
+            </Box>
           </HStack>
         </Flex>
 
