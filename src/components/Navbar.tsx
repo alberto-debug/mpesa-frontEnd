@@ -2,7 +2,7 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Box, Flex, HStack, VStack, Text, Button, Badge } from "@chakra-ui/react"
 
 const Navbar: React.FC = () => {
@@ -10,6 +10,16 @@ const Navbar: React.FC = () => {
   const [cartCount] = useState(3)
 
   const toggleMenu = () => setIsOpen(!isOpen)
+
+  // Close menu when clicking outside or pressing escape
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false)
+    }
+
+    window.addEventListener("keydown", handleEscape)
+    return () => window.removeEventListener("keydown", handleEscape)
+  }, [])
 
   return (
     <Box bg="pink.600" boxShadow="0 2px 10px rgba(0,0,0,0.1)" position="sticky" top={0} zIndex={1000}>
@@ -58,38 +68,10 @@ const Navbar: React.FC = () => {
             >
               Custom Orders
             </Text>
-            <Text
-              as="a"
-              href="#about"
-              fontSize="md"
-              fontWeight="semibold"
-              color="black"
-              cursor="pointer"
-              _hover={{ color: "pink.500" }}
-              transition="color 0.2s"
-            >
-              About
-            </Text>
-            <Text
-              as="a"
-              href="#contact"
-              fontSize="md"
-              fontWeight="semibold"
-              color="black"
-              cursor="pointer"
-              _hover={{ color: "pink.500" }}
-              transition="color 0.2s"
-            >
-              Contact
-            </Text>
           </HStack>
 
           {/* Desktop Actions */}
           <HStack spacing={3} display={{ base: "none", md: "flex" }}>
-            <Button bg="gray.100" color="black" size="md" _hover={{ bg: "gray.200" }}>
-              🔍 Search
-            </Button>
-
             <Button bg="gray.100" color="black" size="md" _hover={{ bg: "gray.200", color: "pink.500" }}>
               ❤️ Wishlist
             </Button>
@@ -165,13 +147,20 @@ const Navbar: React.FC = () => {
               )}
             </Button>
 
-            <Button bg="gray.100" color="black" size="sm" onClick={toggleMenu} _hover={{ bg: "gray.200" }}>
+            <Button
+              bg="gray.100"
+              color="black"
+              size="sm"
+              onClick={toggleMenu}
+              _hover={{ bg: "gray.200" }}
+              zIndex={1200}
+            >
               {isOpen ? "✕" : "☰"}
             </Button>
           </HStack>
         </Flex>
 
-        {/* Mobile Menu Overlay */}
+        {/* Mobile Side Menu */}
         {isOpen && (
           <>
             {/* Backdrop */}
@@ -182,97 +171,114 @@ const Navbar: React.FC = () => {
               w="100vw"
               h="100vh"
               bg="blackAlpha.600"
-              zIndex={999}
+              zIndex={1001}
               onClick={() => setIsOpen(false)}
               display={{ md: "none" }}
             />
 
-            {/* Mobile Menu */}
+            {/* Side Drawer */}
             <Box
-              position="absolute"
-              top="100%"
-              left="0"
+              position="fixed"
+              top="0"
               right="0"
-              bg="pink.600"
-              borderRadius="0 0 xl xl"
-              boxShadow="0 10px 30px rgba(0,0,0,0.3)"
-              zIndex={1000}
+              height="100vh"
+              width="250px"
+              bg="white"
+              boxShadow="-4px 0 15px rgba(0,0,0,0.2)"
+              zIndex={1002}
               display={{ md: "none" }}
-              p={6}
-              border="2px solid"
-              borderColor="pink.700"
-              borderTop="none"
+              transition="transform 0.3s ease"
+              transform={isOpen ? "translateX(0)" : "translateX(100%)"}
+              overflowY="auto"
             >
-              <VStack spacing={4} align="stretch">
-                {/* Mobile Navigation Links */}
-                <VStack spacing={2} align="stretch">
+              <Box p={6}>
+                {/* Menu Header */}
+                <Flex justify="space-between" align="center" mb={6}>
+                  <Text fontSize="xl" fontWeight="bold" color="pink.600">
+                    Menu
+                  </Text>
+                  <Button size="sm" variant="ghost" onClick={() => setIsOpen(false)} _hover={{ bg: "pink.50" }}>
+                    ✕
+                  </Button>
+                </Flex>
+
+                {/* Divider */}
+                <Box h="1px" bg="gray.200" my={4} />
+
+                {/* Navigation Links */}
+                <VStack spacing={1} align="stretch">
                   {[
-                    { label: "Home", href: "#home" },
-                    { label: "Cakes", href: "#cakes" },
-                    { label: "Custom Orders", href: "#custom" },
-                    { label: "About", href: "#about" },
-                    { label: "Contact", href: "#contact" },
+                    { label: "Home", href: "#home", icon: "🏠" },
+                    { label: "Cakes", href: "#cakes", icon: "🍰" },
+                    { label: "Custom Orders", href: "#custom", icon: "✨" },
                   ].map((item, index) => (
-                    <Text
+                    <Button
                       key={index}
                       as="a"
                       href={item.href}
-                      p={4}
-                      borderRadius="lg"
-                      color="black"
-                      fontWeight="semibold"
-                      cursor="pointer"
-                      fontSize="lg"
+                      variant="ghost"
+                      justifyContent="flex-start"
+                      py={6}
+                      borderRadius="md"
+                      color="gray.800"
+                      fontWeight="medium"
+                      leftIcon={<Box mr={2}>{item.icon}</Box>}
                       _hover={{
-                        bg: "pink.500",
-                        color: "white",
-                        transform: "translateX(8px)",
+                        bg: "pink.50",
+                        color: "pink.600",
+                        transform: "translateX(4px)",
                       }}
                       transition="all 0.2s"
                       onClick={() => setIsOpen(false)}
                     >
                       {item.label}
-                    </Text>
+                    </Button>
                   ))}
                 </VStack>
 
-                {/* Mobile Actions */}
-                <VStack spacing={3} pt={4} borderTop="2px solid" borderColor="pink.700">
-                  <HStack spacing={3} w="full">
-                    <Button
-                      bg="gray.100"
-                      color="black"
-                      flex={1}
-                      _hover={{ bg: "black", color: "white" }}
-                      borderRadius="lg"
-                    >
-                      🔍 Search
-                    </Button>
-                    <Button
-                      bg="gray.100"
-                      color="black"
-                      flex={1}
-                      _hover={{ bg: "black", color: "white" }}
-                      borderRadius="lg"
-                    >
-                      ❤️ Wishlist
-                    </Button>
-                  </HStack>
+                {/* Divider */}
+                <Box h="1px" bg="gray.200" my={4} />
+
+                {/* Actions */}
+                <VStack spacing={4} align="stretch">
+                  <Button
+                    variant="ghost"
+                    justifyContent="flex-start"
+                    leftIcon={<Box mr={2}>❤️</Box>}
+                    py={6}
+                    color="gray.800"
+                    _hover={{ bg: "pink.50", color: "pink.600" }}
+                  >
+                    Wishlist
+                  </Button>
 
                   <Button
-                    variant="outline"
-                    borderColor="black"
-                    color="black"
-                    w="full"
-                    borderRadius="lg"
+                    variant="ghost"
+                    justifyContent="flex-start"
+                    leftIcon={<Box mr={2}>👤</Box>}
                     py={6}
-                    fontSize="lg"
-                    _hover={{ bg: "black", color: "white" }}
+                    color="gray.800"
+                    _hover={{ bg: "pink.50", color: "pink.600" }}
                   >
-                    👤 Login / Sign Up
+                    Login / Sign Up
                   </Button>
                 </VStack>
-              </VStack>
+
+                {/* Bottom Action */}
+                <Box position="absolute" bottom="0" left="0" right="0" p={6}>
+                  <Button
+                    bg="pink.600"
+                    color="white"
+                    w="full"
+                    py={6}
+                    borderRadius="md"
+                    _hover={{ bg: "pink.700" }}
+                    boxShadow="0 4px 12px rgba(0,0,0,0.1)"
+                  >
+                    🛒 View Cart ({cartCount})
+                  </Button>
+                </Box>
+              </Box>
             </Box>
           </>
         )}
