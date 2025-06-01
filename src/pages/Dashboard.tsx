@@ -51,7 +51,7 @@ const cakes = [
 
 const Dashboard: React.FC = () => {
   return (
-    <Flex direction="column" minH="100vh" bg="black">
+    <Flex direction="column" minH="100vh" bg="white">
       {/* Navbar */}
       <Navbar />
 
@@ -81,8 +81,8 @@ const Dashboard: React.FC = () => {
           <Container maxW="5xl" position="relative" zIndex={1}>
             <VStack spacing={8}>
               <Badge
-                bg="blackAlpha.700"
-                color="white"
+                bg="whiteAlpha.300"
+                color="black"
                 px={6}
                 py={3}
                 borderRadius="full"
@@ -90,8 +90,8 @@ const Dashboard: React.FC = () => {
                 fontWeight="bold"
                 backdropFilter="blur(10px)"
                 border="2px solid"
-                borderColor="blackAlpha.500"
-                textShadow="0 1px 2px rgba(0,0,0,0.3)"
+                borderColor="whiteAlpha.400"
+                textShadow="0 1px 2px rgba(255,255,255,0.3)"
               >
                 ✨ Handcrafted Since 2020
               </Badge>
@@ -100,9 +100,9 @@ const Dashboard: React.FC = () => {
                 <Heading
                   fontSize={{ base: "4xl", md: "6xl", lg: "7xl" }}
                   fontWeight="900"
-                  color="white"
+                  color="black"
                   lineHeight="0.9"
-                  textShadow="0 4px 20px rgba(0,0,0,0.5)"
+                  textShadow="0 4px 20px rgba(255,255,255,0.5)"
                 >
                   Welcome to
                   <br />
@@ -115,11 +115,11 @@ const Dashboard: React.FC = () => {
 
               <Text
                 fontSize={{ base: "lg", md: "xl" }}
-                color="white"
+                color="black"
                 maxW="2xl"
                 lineHeight="tall"
                 fontWeight="medium"
-                textShadow="0 2px 4px rgba(0,0,0,0.3)"
+                textShadow="0 2px 4px rgba(255,255,255,0.3)"
               >
                 Discover delicious homemade cakes crafted with love and the finest ingredients for every celebration
               </Text>
@@ -138,21 +138,19 @@ const Dashboard: React.FC = () => {
                   rightIcon={<Icon as={FaArrowRight} />}
                   _hover={{
                     transform: "translateY(-3px)",
-                    boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
-                    bg: "gray.900",
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+                    bg: "gray.800",
                   }}
                   transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
-                  boxShadow="0 10px 30px rgba(0,0,0,0.4)"
-                  border="2px solid"
-                  borderColor="whiteAlpha.300"
+                  boxShadow="0 10px 30px rgba(0,0,0,0.2)"
                 >
                   Browse Our Cakes
                 </Button>
 
                 <Button
                   variant="outline"
-                  borderColor="white"
-                  color="white"
+                  borderColor="black"
+                  color="black"
                   bg="whiteAlpha.200"
                   size="lg"
                   px={10}
@@ -178,7 +176,7 @@ const Dashboard: React.FC = () => {
         </Box>
 
         {/* Stats Section */}
-        <Box py={16} bg="black" borderBottom="1px solid" borderColor="gray.800">
+        <Box py={16} bg="white" borderBottom="1px solid" borderColor="gray.100">
           <Container maxW="6xl">
             <SimpleGrid columns={{ base: 2, md: 4 }} spacing={8}>
               {[
@@ -188,10 +186,10 @@ const Dashboard: React.FC = () => {
                 { number: "24/7", label: "Fresh Baking" },
               ].map((stat, index) => (
                 <VStack key={index} spacing={3} textAlign="center">
-                  <Heading size="xl" color="pink.400" fontWeight="black">
+                  <Heading size="xl" color="pink.600" fontWeight="black">
                     {stat.number}
                   </Heading>
-                  <Text fontSize="md" color="gray.300" fontWeight="medium">
+                  <Text fontSize="md" color="black" fontWeight="medium">
                     {stat.label}
                   </Text>
                 </VStack>
@@ -201,7 +199,7 @@ const Dashboard: React.FC = () => {
         </Box>
 
         {/* Featured Cakes */}
-        <Box px={{ base: 4, md: 8 }} py={{ base: 16, md: 24 }} bg="gray.900">
+        <Box px={{ base: 4, md: 8 }} py={{ base: 16, md: 24 }} bg="gray.50">
           <Container maxW="7xl">
             <VStack spacing={16}>
               <VStack spacing={6} textAlign="center">
@@ -217,16 +215,10 @@ const Dashboard: React.FC = () => {
                 >
                   🏆 Customer Favorites
                 </Badge>
-                <Heading fontSize={{ base: "3xl", md: "5xl" }} color="white" fontWeight="black" textAlign="center">
+                <Heading fontSize={{ base: "3xl", md: "5xl" }} color="black" fontWeight="black" textAlign="center">
                   Our Popular Cakes
                 </Heading>
-                <Text
-                  fontSize={{ base: "lg", md: "xl" }}
-                  color="gray.300"
-                  maxW="2xl"
-                  textAlign="center"
-                  lineHeight="tall"
-                >
+                <Text fontSize={{ base: "lg", md: "xl" }} color="black" maxW="2xl" textAlign="center" lineHeight="tall">
                   Each cake is handcrafted with premium ingredients and baked fresh daily
                 </Text>
               </VStack>
@@ -235,16 +227,15 @@ const Dashboard: React.FC = () => {
                 {cakes.map((cake, index) => (
                   <Box
                     key={index}
-                    bg="black"
+                    bg="white"
                     borderRadius="3xl"
                     overflow="hidden"
-                    boxShadow="0 10px 40px rgba(0,0,0,0.3)"
+                    boxShadow="0 10px 40px rgba(0,0,0,0.1)"
                     border="1px solid"
-                    borderColor="gray.700"
+                    borderColor="gray.200"
                     _hover={{
                       transform: "translateY(-12px)",
-                      boxShadow: "0 25px 60px rgba(0,0,0,0.4)",
-                      borderColor: "gray.600",
+                      boxShadow: "0 25px 60px rgba(0,0,0,0.15)",
                     }}
                     transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
                     position="relative"
@@ -275,17 +266,14 @@ const Dashboard: React.FC = () => {
                       top={4}
                       right={4}
                       p={3}
-                      bg="black"
+                      bg="white"
                       borderRadius="full"
                       cursor="pointer"
                       zIndex={2}
-                      boxShadow="0 4px 12px rgba(0,0,0,0.3)"
-                      border="1px solid"
-                      borderColor="gray.700"
+                      boxShadow="0 4px 12px rgba(0,0,0,0.15)"
                       _hover={{
-                        bg: "gray.900",
+                        bg: "pink.50",
                         transform: "scale(1.1)",
-                        borderColor: "pink.500",
                       }}
                       transition="all 0.2s"
                     >
@@ -304,10 +292,10 @@ const Dashboard: React.FC = () => {
                     <VStack p={8} spacing={5} align="stretch">
                       <VStack spacing={3} align="start" w="full">
                         <HStack justify="space-between" w="full" align="start">
-                          <Heading size="lg" color="white" fontWeight="bold" lineHeight="short">
+                          <Heading size="lg" color="black" fontWeight="bold" lineHeight="short">
                             {cake.name}
                           </Heading>
-                          <Text fontSize="2xl" fontWeight="black" color="pink.400">
+                          <Text fontSize="2xl" fontWeight="black" color="pink.600">
                             {cake.price}
                           </Text>
                         </HStack>
@@ -318,23 +306,23 @@ const Dashboard: React.FC = () => {
                               <Icon
                                 key={i}
                                 as={FaStar}
-                                color={i < Math.floor(cake.rating) ? "yellow.400" : "gray.600"}
+                                color={i < Math.floor(cake.rating) ? "yellow.400" : "gray.300"}
                                 boxSize={4}
                               />
                             ))}
                           </HStack>
-                          <Text fontSize="sm" color="gray.400" fontWeight="medium">
+                          <Text fontSize="sm" color="black" fontWeight="medium">
                             {cake.rating} ({cake.reviews} reviews)
                           </Text>
                         </HStack>
                       </VStack>
 
-                      <Text color="gray.300" fontSize="md" lineHeight="tall">
+                      <Text color="black" fontSize="md" lineHeight="tall">
                         {cake.description}
                       </Text>
 
                       <Button
-                        bg="pink.500"
+                        bg="black"
                         color="white"
                         size="lg"
                         w="full"
@@ -344,9 +332,9 @@ const Dashboard: React.FC = () => {
                         fontWeight="bold"
                         leftIcon={<Icon as={FaShoppingCart} />}
                         _hover={{
-                          bg: "pink.600",
+                          bg: "gray.800",
                           transform: "translateY(-2px)",
-                          boxShadow: "0 8px 25px rgba(236, 72, 153, 0.3)",
+                          boxShadow: "0 8px 25px rgba(0,0,0,0.3)",
                         }}
                         transition="all 0.2s"
                       >
@@ -359,9 +347,9 @@ const Dashboard: React.FC = () => {
 
               <Button
                 variant="outline"
-                borderColor="pink.400"
-                color="pink.400"
-                bg="black"
+                borderColor="black"
+                color="black"
+                bg="white"
                 size="lg"
                 px={12}
                 py={6}
@@ -372,9 +360,8 @@ const Dashboard: React.FC = () => {
                 rightIcon={<Icon as={FaArrowRight} />}
                 _hover={{
                   transform: "translateY(-2px)",
-                  boxShadow: "0 8px 25px rgba(236, 72, 153, 0.2)",
-                  bg: "gray.900",
-                  borderColor: "pink.300",
+                  boxShadow: "0 8px 25px rgba(0,0,0,0.2)",
+                  bg: "gray.50",
                 }}
                 transition="all 0.3s"
               >
@@ -410,13 +397,13 @@ const Dashboard: React.FC = () => {
                   fontWeight="black"
                   lineHeight="shorter"
                   textShadow="0 4px 20px rgba(0,0,0,0.3)"
-                  color="white"
+                  color="black"
                 >
                   Ready to Order Your Perfect Cake?
                 </Heading>
                 <Text
                   fontSize={{ base: "lg", md: "xl" }}
-                  color="white"
+                  color="grey"
                   maxW="2xl"
                   lineHeight="tall"
                   fontWeight="medium"
@@ -436,16 +423,13 @@ const Dashboard: React.FC = () => {
                   fontSize="lg"
                   fontWeight="bold"
                   borderRadius="full"
-                  border="2px solid"
-                  borderColor="whiteAlpha.300"
                   _hover={{
                     transform: "translateY(-3px)",
-                    boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
-                    bg: "gray.900",
-                    borderColor: "whiteAlpha.500",
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+                    bg: "gray.800",
                   }}
                   transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
-                  boxShadow="0 10px 30px rgba(0,0,0,0.3)"
+                  boxShadow="0 10px 30px rgba(0,0,0,0.2)"
                 >
                   Order Now
                 </Button>
@@ -453,7 +437,7 @@ const Dashboard: React.FC = () => {
                   variant="outline"
                   borderColor="white"
                   color="white"
-                  bg="blackAlpha.300"
+                  bg="blackAlpha.500"
                   size="lg"
                   px={12}
                   py={7}
@@ -462,9 +446,9 @@ const Dashboard: React.FC = () => {
                   borderRadius="full"
                   borderWidth="2px"
                   _hover={{
-                    bg: "blackAlpha.500",
+                    bg: "whiteAlpha.300",
                     transform: "translateY(-3px)",
-                    boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
                   }}
                   transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
                   backdropFilter="blur(10px)"
