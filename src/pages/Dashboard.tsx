@@ -1,5 +1,4 @@
-
-import type React from "react"
+import type React from "react";
 import {
   Box,
   Heading,
@@ -14,15 +13,16 @@ import {
   Icon,
   VStack,
   HStack,
-} from "@chakra-ui/react"
-import { FaStar, FaHeart, FaShoppingCart, FaArrowRight } from "react-icons/fa"
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer"
+} from "@chakra-ui/react";
+import { FaStar, FaHeart, FaShoppingCart, FaArrowRight } from "react-icons/fa";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const cakes = [
   {
     name: "Chocolate Heaven",
-    image: "https://images.unsplash.com/photo-1612197593458-c0a9e5c507e2?auto=format&fit=crop&w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1612197593458-c0a9e5c507e2?auto=format&fit=crop&w=800&q=80",
     price: "$28.99",
     rating: 4.8,
     reviews: 124,
@@ -31,7 +31,8 @@ const cakes = [
   },
   {
     name: "Vanilla Dream",
-    image: "https://images.unsplash.com/photo-1606312616077-d6f1f363e25e?auto=format&fit=crop&w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1606312616077-d6f1f363e25e?auto=format&fit=crop&w=800&q=80",
     price: "$24.99",
     rating: 4.6,
     reviews: 89,
@@ -40,14 +41,15 @@ const cakes = [
   },
   {
     name: "Strawberry Bliss",
-    image: "https://images.unsplash.com/photo-1604908177742-f96cde062bfa?auto=format&fit=crop&w=800&q=80",
+    image:
+      "https://images.unsplash.com/photo-1604908177742-f96cde062bfa?auto=format&fit=crop&w=800&q=80",
     price: "$32.99",
     rating: 4.9,
     reviews: 156,
     badge: "New",
     description: "Fresh strawberry cake with cream cheese frosting",
   },
-]
+];
 
 const Dashboard: React.FC = () => {
   return (
@@ -108,7 +110,12 @@ const Dashboard: React.FC = () => {
                   <br />
                   CakeStore
                 </Heading>
-                <Text fontSize="6xl" role="img" aria-label="cake" filter="drop-shadow(0 4px 8px rgba(0,0,0,0.3))">
+                <Text
+                  fontSize="6xl"
+                  role="img"
+                  aria-label="cake"
+                  filter="drop-shadow(0 4px 8px rgba(0,0,0,0.3))"
+                >
                   🍰
                 </Text>
               </VStack>
@@ -121,10 +128,15 @@ const Dashboard: React.FC = () => {
                 fontWeight="medium"
                 textShadow="0 2px 4px rgba(255,255,255,0.3)"
               >
-                Discover delicious homemade cakes crafted with love and the finest ingredients for every celebration
+                Discover delicious homemade cakes crafted with love and the
+                finest ingredients for every celebration
               </Text>
 
-              <Stack direction={{ base: "column", sm: "row" }} spacing={4} pt={4}>
+              <Stack
+                direction={{ base: "column", sm: "row" }}
+                spacing={4}
+                pt={4}
+              >
                 <Button
                   bg="black"
                   color="white"
@@ -215,15 +227,31 @@ const Dashboard: React.FC = () => {
                 >
                   🏆 Customer Favorites
                 </Badge>
-                <Heading fontSize={{ base: "3xl", md: "5xl" }} color="black" fontWeight="black" textAlign="center">
+                <Heading
+                  fontSize={{ base: "3xl", md: "5xl" }}
+                  color="black"
+                  fontWeight="black"
+                  textAlign="center"
+                >
                   Our Popular Cakes
                 </Heading>
-                <Text fontSize={{ base: "lg", md: "xl" }} color="black" maxW="2xl" textAlign="center" lineHeight="tall">
-                  Each cake is handcrafted with premium ingredients and baked fresh daily
+                <Text
+                  fontSize={{ base: "lg", md: "xl" }}
+                  color="black"
+                  maxW="2xl"
+                  textAlign="center"
+                  lineHeight="tall"
+                >
+                  Each cake is handcrafted with premium ingredients and baked
+                  fresh daily
                 </Text>
               </VStack>
 
-              <SimpleGrid columns={{ base: 1, sm: 2, lg: 3 }} spacing={10} w="full">
+              <SimpleGrid
+                columns={{ base: 1, sm: 2, lg: 3 }}
+                spacing={10}
+                w="full"
+              >
                 {cakes.map((cake, index) => (
                   <Box
                     key={index}
@@ -246,7 +274,11 @@ const Dashboard: React.FC = () => {
                       top={4}
                       left={4}
                       bg={
-                        cake.badge === "Best Seller" ? "red.500" : cake.badge === "Popular" ? "purple.500" : "green.500"
+                        cake.badge === "Best Seller"
+                          ? "red.500"
+                          : cake.badge === "Popular"
+                            ? "purple.500"
+                            : "green.500"
                       }
                       color="white"
                       px={3}
@@ -277,7 +309,12 @@ const Dashboard: React.FC = () => {
                       }}
                       transition="all 0.2s"
                     >
-                      <Icon as={FaHeart} color="gray.400" _hover={{ color: "pink.500" }} boxSize={4} />
+                      <Icon
+                        as={FaHeart}
+                        color="gray.400"
+                        _hover={{ color: "pink.500" }}
+                        boxSize={4}
+                      />
                     </Box>
 
                     <Image
@@ -292,10 +329,19 @@ const Dashboard: React.FC = () => {
                     <VStack p={8} spacing={5} align="stretch">
                       <VStack spacing={3} align="start" w="full">
                         <HStack justify="space-between" w="full" align="start">
-                          <Heading size="lg" color="black" fontWeight="bold" lineHeight="short">
+                          <Heading
+                            size="lg"
+                            color="black"
+                            fontWeight="bold"
+                            lineHeight="short"
+                          >
                             {cake.name}
                           </Heading>
-                          <Text fontSize="2xl" fontWeight="black" color="pink.600">
+                          <Text
+                            fontSize="2xl"
+                            fontWeight="black"
+                            color="pink.600"
+                          >
                             {cake.price}
                           </Text>
                         </HStack>
@@ -306,7 +352,11 @@ const Dashboard: React.FC = () => {
                               <Icon
                                 key={i}
                                 as={FaStar}
-                                color={i < Math.floor(cake.rating) ? "yellow.400" : "gray.300"}
+                                color={
+                                  i < Math.floor(cake.rating)
+                                    ? "yellow.400"
+                                    : "gray.300"
+                                }
                                 boxSize={4}
                               />
                             ))}
@@ -389,7 +439,12 @@ const Dashboard: React.FC = () => {
             bgGradient="radial(circle at 30% 70%, whiteAlpha.200 0%, transparent 50%)"
           />
 
-          <Container maxW="4xl" textAlign="center" position="relative" zIndex={1}>
+          <Container
+            maxW="4xl"
+            textAlign="center"
+            position="relative"
+            zIndex={1}
+          >
             <VStack spacing={10}>
               <VStack spacing={6}>
                 <Heading
@@ -409,7 +464,8 @@ const Dashboard: React.FC = () => {
                   fontWeight="medium"
                   textShadow="0 2px 4px rgba(0,0,0,0.2)"
                 >
-                  Custom orders available for weddings, birthdays, and all special occasions
+                  Custom orders available for weddings, birthdays, and all
+                  special occasions
                 </Text>
               </VStack>
 
@@ -464,7 +520,7 @@ const Dashboard: React.FC = () => {
       {/* Footer */}
       <Footer />
     </Flex>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
